@@ -12,9 +12,19 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
-            CreateBlog();
+            //CreateBlog();
+            AddPost();
             Console.Write("That's all folks...");
             Console.ReadKey();
+        }
+
+        private static void AddPost() {
+            var db = new Context();
+            var blog = db.Blogs.Find(1);
+            blog.Posts.Add(new Post{
+                Title = "My First Post",
+                Content = "Let's keep this short"});
+            db.SaveChanges();
         }
 
         private static void CreateBlog()
